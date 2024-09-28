@@ -21,27 +21,102 @@ var _ = require('underbar');
  *    IMPORTANT: Make sure you replace <YOUR_GITHUB_FOLDER with your actual github folder name that is in your workspace.
  */
 
+/***
+ I : array of customer objects
+ O : number of male customers
+ */
+
+
 var maleCount = function(array) {
+    let males = [];
+     _.filter(array, function(current, index, array){
+         if (current.gender === 'male') {
+         males.push(current)
+         }
+        })
+        return males.length;
+};
+
+
+var femaleCount = function(array) {
+    let females = [];
+    _.filter(array, function(current, index, array){
+        if (current.gender === 'female') {
+            females.push(current)
+        }
+    })
+    return females.length
+};
+
+// O : oldest customer's name
+var oldestCustomer = function(array) {
+    let oldest = _.reduce(array, function(accumulator, current){
+        // accumulator = {adele mullin} | current = {olga newton}
+        if (current.age > accumulator.age) {
+            return current;
+        }
+        return accumulator
+    });
+    return oldest.name;
+}; 
+
+// invoke _.reduce()
+    // outputl=;
+    // if (undefined === undefined)
+        // output = {Adele Mullin}
+        // for loop
+            // i = 1
+                // output = func({adele mullin}, {olga newton})
+
+var youngestCustomer = function(array) {
+    let youngest = _.reduce(array, function(accumulator, current){
+        if (current.age < accumulator.age) {
+            return current;
+        }
+        return accumulator
+    })
+    return youngest.name
+};
+
+var averageBalance = function(array) {
+    // let length = array.length
+    let avg = 0
+    // // let accumulator = 0
+    let sum = 
+    _.reduce(array, function(accumulator, current, index) {
+        return accumulator = accumulator + current.balance
+    }, 0);
+    return avg = sum / array.length
+    //  return avg
+};
+
+var firstLetterCount = function(array, letter) {
+    let count = [];
+    _.filter(array, function(current, index, array) {
+        if (current.name.charAt(0).toUpperCase() === letter || current.name.charAt(0).toLowerCase() === letter){
+            count.push(current)
+        }
+        return count
+    });
+    return count.length;
+};
+
+var friendFirstLetterCount = function(array) {
+    let count = [];
+    // _.filter = 
+};
+
+var friendsCount = function(array) {
 
 };
 
-var femaleCount;
+var topThreeTags = function(array) {
 
-var oldestCustomer;
+};
 
-var youngestCustomer;
+var genderCount = function(array) {
 
-var averageBalance;
-
-var firstLetterCount;
-
-var friendFirstLetterCount;
-
-var friendsCount;
-
-var topThreeTags;
-
-var genderCount;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
