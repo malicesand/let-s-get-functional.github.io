@@ -78,17 +78,17 @@ var youngestCustomer = function(array) {
     return youngest.name
 };
 
-var averageBalance = function(array) {
-    // let length = array.length
-    let avg = 0
-    // // let accumulator = 0
-    let sum = 
-    _.reduce(array, function(accumulator, current, index) {
-        return accumulator = accumulator + current.balance
-    }, 0);
-    return avg = sum / array.length
-    //  return avg
+var averageBalance = function(customers) {
+    let sum = _.reduce(customers, function(sum, current){
+        var no$ = current.balance.replace('$', '')
+        var noCom = no$.replace(',', '')
+        var num = Number(noCom)
+        return sum += num;
+    }, 0)
+    let avg = sum / customers.length;
+    return avg
 };
+
 
 var firstLetterCount = function(array, letter) {
     let count = [];
@@ -101,17 +101,47 @@ var firstLetterCount = function(array, letter) {
     return count.length;
 };
 
-var friendFirstLetterCount = function(array) {
+var friendFirstLetterCount = function(array, customer, letter) {
     let count = [];
-    // _.filter = 
+    _.filter(array, function(current, index, array) {
+        if (current.name === customer) {
+            for (const element of current.friends) {
+                if (element.name.charAt(0).toUpperCase() === letter || element.name.charAt(0).toLowerCase() === letter) {
+                    count.push(element.name)
+                }
+            }
+        }
+        return count;
+    })
+    return count.length
 };
 
-var friendsCount = function(array) {
+var friendsCount = function(array, name) {
+    let count = [];
+    _.filter(array, function(current, index, array) {
+        for (const element of current.friends) {
+            if (element.name === name) {
+                count.push(current.name);
+            }
+        }
+        return count
+    })
+    return count
 
 };
 
-var topThreeTags = function(array) {
-
+var topThreeTags = function(customers) {
+    var output = []
+    var tagMap = {};
+   customers.forEach(function(customer){
+    customer.tags.forEach(function(tag) {
+        tagMap[tag] = (tagMap[tag] || 0) + 1
+    });
+   });
+   var tagPairs = Object.entries(tagMap);
+    tagPairs.sort((a, b) => a[1] - b[1]);
+   return tagPairs.slice(0, 3).map(([tag]) => tag)
+//    return output
 };
 
 var genderCount = function(array) {
