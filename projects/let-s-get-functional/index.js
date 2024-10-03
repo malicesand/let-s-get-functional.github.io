@@ -131,17 +131,18 @@ var friendsCount = function(array, name) {
 };
 
 var topThreeTags = function(customers) {
-    var output = []
+    // create frequency map for the tags
     var tagMap = {};
-   customers.forEach(function(customer){
-    customer.tags.forEach(function(tag) {
+   customers.forEach(function(customers){
+    customers.tags.forEach(function(tag) {
         tagMap[tag] = (tagMap[tag] || 0) + 1
     });
    });
-   var tagPairs = Object.entries(tagMap);
-    tagPairs.sort((a, b) => a[1] - b[1]);
-   return tagPairs.slice(0, 3).map(([tag]) => tag)
-//    return output
+
+    // sort tags by frquency in descending order
+    const sortedTags = Object.entries(tagMap).sort((a, b) => b[1] - a[1])
+    // return top three tags
+    return sortedTags.slice(0, 3).map(([tag]) => tag)
 };
 
 var genderCount = function(array) {
