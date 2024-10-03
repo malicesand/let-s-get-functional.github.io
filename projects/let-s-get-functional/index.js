@@ -131,21 +131,61 @@ var friendsCount = function(array, name) {
 };
 
 var topThreeTags = function(customers) {
+// take in customers array and return new aray with the top three tags 
     // create frequency map for the tags
+    // create New Object's New Key:Value pairs with properties from Input Array
     var tagMap = {};
-   customers.forEach(function(customers){
-    customers.tags.forEach(function(tag) {
+
+    // Iterate thru customers Array to access Objects and invoke function to name the Objects 'customer'
+    customers.forEach(function(customer){
+    // Iterate thru each 'customer' Object to access the Array contained in it's 'tags' property and invoke function to name each element in the array 'tag'
+    customer.tags.forEach(function(tag) {
+        // invoking above function creates tagMap's properties counting the tags //
+            //initilize a new property in tagMap for each 'tag' element 
+            // assign 'tag' value as the key's name
+            // assign tag frequency as the key value 
+            // each iteration will update existing key:value pairs and create new ones upon unique tags
         tagMap[tag] = (tagMap[tag] || 0) + 1
+        // so key : value is tag : frequency count
+        //  || OR operator has left-to-right associativity
+            // here we're using it it to provide a default value for the defined variable
+        // returns map Object {tag : count, tag : count}
     });
    });
-
-    // sort tags by frquency in descending order
+    // return new array with 
+        //Object.entries(object) returns 2 dimensional array, where each inner represents a key-value pair from the object
+    // tags sorted by frequency in descending order 
+        // sort takes a compare function as an argument, and this function is used to determine the sorting order of the elements
+            // params: a, b - represent any two elements from the array
+            // returns negative, 0, or positive value to determine sort order
+                                                //params.   // b minus a
+                                           // a - b for ascending, b - a for descending 
     const sortedTags = Object.entries(tagMap).sort((a, b) => b[1] - a[1])
-    // return top three tags
+    // return array with top three tags 
+        // method chainging :slice the first three elements from the sorted array
+        // method chaining :map 2 dimensional array to 1 dimensional array containing only the key names ('tags')
     return sortedTags.slice(0, 3).map(([tag]) => tag)
 };
 
-var genderCount = function(array) {
+// create summary of genders from 'customers' array
+// output: object {gender: count, male: 2, female: 3, nb: 5}
+// use .reduce
+var genderCount = function(customers) {
+    // create new Object to contain our gender summary
+    var genMap = {};
+
+    // iterate 'customers' array to access nested objects and invoke function to initialize each object with the name 'customer'
+    customers.forEach(function(customer){
+        // access the 'gender' property from every 'customer' object
+        // invoking function creates new key: value pairs for the new object genMap
+        // initialize new property for each unique gender
+        // assign key name as the value at customer.gener
+        // assign key value as the amount of customers with that gender
+            // updated upon each iteration of an object
+        genMap[customer.gender] = (genMap[customer.gender] || 0) + 1
+    });
+    // return gender summary
+    return genMap
 
 };
 
